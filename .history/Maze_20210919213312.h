@@ -24,10 +24,7 @@ public:
 	int get_rows() const {return rows_; }  // you should be able to change the size of your 
 	int get_cols() const {return cols_; }  // board by changing these numbers and the numbers in the arr_ field
 
-	void displayUpdated(); //display the board}
-	std::vector<int> getPath(){return path;};
-
-	bool generate();
+	void displayUpdated(std::vector<int>); //display the board}
 
 //	// TODO: you MUST implement the following functions
 //	SquareType get_square_value(Position pos) const; 
@@ -51,7 +48,7 @@ public:
 
 private:
 	SquareType arr_[4][4];
-	std::vector<int> path;
+	
 	int rows_; // might be convenient but not necessary
 	int cols_;
 	
@@ -61,7 +58,7 @@ private:
 class Maze {
 public:
 	// TODO: implement these functions
-	Maze(int , int); // constructor
+	Maze(); // constructor
 
 	// initialize a new game, given one human player and 
 	// a number of enemies to generate
@@ -82,13 +79,13 @@ public:
 	std::string GenerateReport();
 	friend std::ostream& operator<<(std::ostream& os, const Maze &m);
 
-	
+	bool generate();
 
 private:
 	Board *board_; // HINT: when you instantiate your board_, use the new Board() syntax
 	std::vector<Player *> players_;
 	int turn_count_;
-	
+	std::vector<int> path;
 	// you may add more fields, as needed
 
 };  // class Maze

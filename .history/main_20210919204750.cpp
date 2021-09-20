@@ -4,8 +4,7 @@
 
 
 int main(){
-    Board chess_board(4,4);
-    //Maze my_maze = new Maze(4,4);
+    Board chess_board;
     chess_board.displayUpdated();
     return 0;
 }

@@ -108,16 +108,12 @@ bool Board::generate(){
     int start_c = 0;
     int end_c = cols_ - 1;
     int end_r = rows_ - 1;
-     while( path[path.size()-1] != 15 && path.size() < 13 && max_step < 16){
+     while(start_r != end_r && start_c != end_c && path.size() < 13 && max_step < 16){
         std::vector<int> direction = getDirection(path[path.size()-1], rows_, cols_);
         //printer1(direction);
         int curr = rand()%direction.size();
         int temp_r = direction[curr] % rows_;
         int temp_c = direction[curr] / rows_;
-        
-
-        //std::cout << direction[curr][0] << " " << direction[curr][1] << std::endl;
-        if(visited[temp_c][temp_r]) continue;
         std::cout << "tmp_point " << temp_r << " " << temp_c <<  std::endl;
         //std::cout << "tmp_c " << temp_c << std::endl;
         std::cout <<"-------------"<<std::endl;
@@ -134,6 +130,9 @@ bool Board::generate(){
             std::cout << std::endl;
         }
         std::cout <<"-------------"<<std::endl;
+
+        //std::cout << direction[curr][0] << " " << direction[curr][1] << std::endl;
+        if(visited[temp_c][temp_r]) continue;
         path.push_back(direction[curr]);
         max_step ++;
         

@@ -4,7 +4,6 @@
 #include<array>
 #include"Maze.h"
 #include<time.h>
-#include<cstring>
 //using namespace std;
 //return true when the path is not in the vector
 bool checkInPath(const int num, const std::vector<int> &vec){
@@ -91,7 +90,6 @@ void printer1(std::vector<std::array<int, 2>> pri){
 bool Board::generate(){ 
     int max_step = 1; //max step to reach exit is 8
     int visited[cols_][rows_] ;
-    //visited[0][0] = 0;
     memset(visited, 0, sizeof(visited));
     for(int d =0 ;d < cols_; d++){
         for(int f = 0; f < rows_; f++){
@@ -108,16 +106,12 @@ bool Board::generate(){
     int start_c = 0;
     int end_c = cols_ - 1;
     int end_r = rows_ - 1;
-     while( path[path.size()-1] != 15 && path.size() < 13 && max_step < 16){
+   /*  while(start_r != end_r && start_c != end_c && path.size() < 13 && max_step < 16){
         std::vector<int> direction = getDirection(path[path.size()-1], rows_, cols_);
         //printer1(direction);
         int curr = rand()%direction.size();
         int temp_r = direction[curr] % rows_;
         int temp_c = direction[curr] / rows_;
-        
-
-        //std::cout << direction[curr][0] << " " << direction[curr][1] << std::endl;
-        if(visited[temp_c][temp_r]) continue;
         std::cout << "tmp_point " << temp_r << " " << temp_c <<  std::endl;
         //std::cout << "tmp_c " << temp_c << std::endl;
         std::cout <<"-------------"<<std::endl;
@@ -134,6 +128,9 @@ bool Board::generate(){
             std::cout << std::endl;
         }
         std::cout <<"-------------"<<std::endl;
+
+        //std::cout << direction[curr][0] << " " << direction[curr][1] << std::endl;
+        if(visited[temp_c][temp_r]) continue;
         path.push_back(direction[curr]);
         max_step ++;
         
@@ -142,7 +139,7 @@ bool Board::generate(){
         visited[temp_c][temp_r] = 1;
         direction.clear();
         //displayUpdated();
-    } 
+    } */
     printer(path);
     if(start_r == end_r && start_c == end_c) return true;
     return false;

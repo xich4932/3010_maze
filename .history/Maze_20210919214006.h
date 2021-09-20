@@ -61,7 +61,7 @@ private:
 class Maze {
 public:
 	// TODO: implement these functions
-	Maze(int , int); // constructor
+	Maze(); // constructor
 
 	// initialize a new game, given one human player and 
 	// a number of enemies to generate
