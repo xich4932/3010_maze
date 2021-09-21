@@ -7,7 +7,7 @@ struct Position {
 	int row;
 	int col;
 	Position(): row(0), col(0) {};
-	Position(int c, int r): row(r), col(c){};
+	Position(int r, int c): row(r), col(c){};
 	// already implemented for you!
 	bool operator==(const Position &other) {
 		return row == other.row && col == other.col;

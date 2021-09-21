@@ -7,33 +7,12 @@
 
 
 // you may change this enum as you need
-						// 0   1     2     3      4       5
 enum class SquareType { Wall, Exit, Empty, Human, Enemy, Treasure };
 
 // TODO: implement
 // this function should return a string representation of a given SquareType
 // for example an ascii letter or an emoji
-std::string SquareTypeStringify(SquareType sq){
-	switch (sq)
-	{
-	case SquareType::Wall :
-		/* code */
-		return "Wall";
-	case SquareType::Exit :
-		/* code */
-		return "Exit";
-	case SquareType::Empty :
-		/* code */
-		return "Empty";
-	case SquareType::Human:
-		return "Human";
-	case SquareType::Enemy :
-		/* code */
-		return "Enemy";
-	default:
-		return "Treasure";
-	}
-}
+std::string SquareTypeStringify(SquareType sq);
 
 class Board {
 public:
@@ -47,28 +26,30 @@ public:
 
 	void displayUpdated(); //display the board}
 	std::vector<int> getPath(){return path;};
-	//generate path of maze
+	void setPoint(int r, int c, int num){
+		arr_[c][r] = num;
+	}
 	bool generate();
 
-	SquareType get_square_value(Position pos) const; 
-	// TODO: you MUST implement the following functions
-
-	// set the value of a square to the given SquareType
-	void SetSquareValue(Position pos, SquareType value);
-
-	// get the possible Positions that a Player could move to
-	// (not off the board or into a wall)
-	std::vector<Position> GetMoves(Player *p);
-
-	// Move a player to a new position on the board. Return
-	// true if they moved successfully, false otherwise.
-	bool MovePlayer(Player *p, Position pos);
-
-	// Get the square type of the exit square∏
-	SquareType GetExitOccupant();
-
-	// You probably want to implement this
-	friend std::ostream& operator<<(std::ostream& os, const Board &b);
+//	// TODO: you MUST implement the following functions
+//	SquareType get_square_value(Position pos) const; 
+//
+//	// set the value of a square to the given SquareType
+//	void SetSquareValue(Position pos, SquareType value);
+//
+//	// get the possible Positions that a Player could move to
+//	// (not off the board or into a wall)
+//	std::vector<Position> GetMoves(Player *p);
+//
+//	// Move a player to a new position on the board. Return
+//	// true if they moved successfully, false otherwise.
+//	bool MovePlayer(Player *p, Position pos);
+//
+//	// Get the square type of the exit square∏
+//	SquareType GetExitOccupant();
+//
+//	// You probably want to implement this
+//	friend std::ostream& operator<<(std::ostream& os, const Board &b);
 
 private:
 	SquareType arr_[4][4];

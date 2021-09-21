@@ -25,8 +25,6 @@ std::string SquareTypeStringify(SquareType sq){
 	case SquareType::Empty :
 		/* code */
 		return "Empty";
-	case SquareType::Human:
-		return "Human";
 	case SquareType::Enemy :
 		/* code */
 		return "Enemy";

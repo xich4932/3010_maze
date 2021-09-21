@@ -65,8 +65,6 @@ Maze::Maze(int r, int c, std::string name){
         }
         players_[d]->set_position(temp_r, temp_c);
     }
-
-    
     
 }
 
@@ -118,11 +116,7 @@ void printer1(std::vector<std::array<int, 2>> pri){
 bool Maze::IsGameOver(){
     if(players_[0]->get_position() == players_[8]->get_position()){
         return true;
-    }else if(players_[0]->get_position() == players_[1]->get_position() ||
-    players_[0]->get_position() == players_[2]->get_position()){
-        return true;
-    }
-    return false;
+    }else if(players_[0]->get_position() == players_[])
 }
 
 

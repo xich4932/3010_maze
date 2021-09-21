@@ -44,16 +44,14 @@ void Board::displayUpdated(){
 Maze::Maze(int r, int c, std::string name){
     //generate (board_);
     board_ = new Board(r, c);
-    players_.push_back(new Player(name ,1));            //0
-    players_.push_back(new Player("clown_face1" ,0));   //1      
-    players_.push_back(new Player("clown_face2" ,0));   //2        
-    players_.push_back(new Player("pear_1" ,0));        //3    
-    players_.push_back(new Player("pear_2" ,0));        //4    
-    players_.push_back(new Player("wall_1",0));         //5
-    players_.push_back(new Player("wall_2" ,0));        //6    
-    players_.push_back(new Player("wall_3" ,0));        //7    
-    players_.push_back(new Player("exit" ,0));          //8
-
+    players_.push_back(new Player(name ,1));
+    players_.push_back(new Player("clown_face1" ,0));
+    players_.push_back(new Player("clown_face2" ,0));
+    players_.push_back(new Player("pear_1" ,0));
+    players_.push_back(new Player("pear_2" ,0));
+    players_.push_back(new Player("wall_1",0));
+    players_.push_back(new Player("wall_2" ,0));
+    players_.push_back(new Player("wall_3" ,0));
     //set the position of wall that's is in not the expected solution path
     std::vector<int> path = board_->getPath();
     for(int d = 5; d < 8; d++){
@@ -65,8 +63,6 @@ Maze::Maze(int r, int c, std::string name){
         }
         players_[d]->set_position(temp_r, temp_c);
     }
-
-    
     
 }
 
@@ -116,13 +112,7 @@ void printer1(std::vector<std::array<int, 2>> pri){
 }
 
 bool Maze::IsGameOver(){
-    if(players_[0]->get_position() == players_[8]->get_position()){
-        return true;
-    }else if(players_[0]->get_position() == players_[1]->get_position() ||
-    players_[0]->get_position() == players_[2]->get_position()){
-        return true;
-    }
-    return false;
+    if()
 }
 
 

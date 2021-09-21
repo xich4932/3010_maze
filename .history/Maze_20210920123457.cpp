@@ -44,16 +44,14 @@ void Board::displayUpdated(){
 Maze::Maze(int r, int c, std::string name){
     //generate (board_);
     board_ = new Board(r, c);
-    players_.push_back(new Player(name ,1));            //0
-    players_.push_back(new Player("clown_face1" ,0));   //1      
-    players_.push_back(new Player("clown_face2" ,0));   //2        
-    players_.push_back(new Player("pear_1" ,0));        //3    
-    players_.push_back(new Player("pear_2" ,0));        //4    
-    players_.push_back(new Player("wall_1",0));         //5
-    players_.push_back(new Player("wall_2" ,0));        //6    
-    players_.push_back(new Player("wall_3" ,0));        //7    
-    players_.push_back(new Player("exit" ,0));          //8
-
+    players_.push_back(new Player(name ,1));
+    players_.push_back(new Player("clown_face1" ,0));
+    players_.push_back(new Player("clown_face2" ,0));
+    players_.push_back(new Player("pear_1" ,0));
+    players_.push_back(new Player("pear_2" ,0));
+    players_.push_back(new Player("wall_1",0));
+    players_.push_back(new Player("wall_2" ,0));
+    players_.push_back(new Player("wall_3" ,0));
     //set the position of wall that's is in not the expected solution path
     std::vector<int> path = board_->getPath();
     for(int d = 5; d < 8; d++){
@@ -65,8 +63,6 @@ Maze::Maze(int r, int c, std::string name){
         }
         players_[d]->set_position(temp_r, temp_c);
     }
-
-    
     
 }
 
@@ -116,13 +112,7 @@ void printer1(std::vector<std::array<int, 2>> pri){
 }
 
 bool Maze::IsGameOver(){
-    if(players_[0]->get_position() == players_[8]->get_position()){
-        return true;
-    }else if(players_[0]->get_position() == players_[1]->get_position() ||
-    players_[0]->get_position() == players_[2]->get_position()){
-        return true;
-    }
-    return false;
+    
 }
 
 
@@ -186,95 +176,25 @@ bool Board::generate(){
     return false;
 }
 
-SquareType Board::get_square_value(Position pos){
-    return arr_[pos.col][pos.row];
+SquareType get_square_value(Position pos){
+    
 }; 
 // TODO: you MUST implement the following functions
 
 // set the value of a square to the given SquareType
-void Board::SetSquareValue(Position pos, SquareType value){
-    arr_[pos.col][pos.row] = value;
-}
+void SetSquareValue(Position pos, SquareType value);
 
 // get the possible Positions that a Player could move to
 // (not off the board or into a wall)
-std::vector<Position> Board::GetMoves(Player *p){
-    std::vector<Position> ret;
-    Position temp_pos = p->get_position();
-    if(temp_pos.col == 0){
-        if(SquareTypeStringify(arr_[temp_pos.col + 1][temp_pos.row]) != "Wall" &&
-            SquareTypeStringify(arr_[temp_pos.col + 1][temp_pos.row]) != "Enemy")
-        ret.push_back(new Position(temp_pos.col + 1, temp_pos.row));
-    }else if(temp_pos.col == cols_ - 1){
-        if(SquareTypeStringify(arr_[temp_pos.col - 1][temp_pos.row]) != "Wall" &&
-            SquareTypeStringify(arr_[temp_pos.col - 1][temp_pos.row]) != "Enemy")
-        ret.push_back(new Position(temp_pos.col - 1, temp_pos.row));
-    }else{
-        if(SquareTypeStringify(arr_[temp_pos.col + 1][temp_pos.row]) != "Wall" &&
-            SquareTypeStringify(arr_[temp_pos.col + 1][temp_pos.row]) != "Enemy")
-        ret.push_back(new Position(temp_pos.col + 1, temp_pos.row));
-        if(SquareTypeStringify(arr_[temp_pos.col - 1][temp_pos.row]) != "Wall" &&
-            SquareTypeStringify(arr_[temp_pos.col - 1][temp_pos.row]) != "Enemy")
-        ret.push_back(new Position(temp_pos.col - 1, temp_pos.row));
-    }
-
-    if(temp_pos.row == 0){
-        if(SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row + 1]) != "Wall" &&
-            SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row + 1]) != "Enemy")
-        ret.push_back(new Position(temp_pos.col , temp_pos.row + 1));
-    }else if(temp_pos.row == rows_ - 1){
-        if(SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row - 1]) != "Wall" &&
-            SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row - 1]) != "Enemy")
-        ret.push_back(new Position(temp_pos.col , temp_pos.row - 1));
-    }else{
-        if(SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row + 1]) != "Wall" &&
-            SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row + 1]) != "Enemy")
-        ret.push_back(new Position(temp_pos.col , temp_pos.row + 1));
-        if(SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row - 1]) != "Wall" &&
-            SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row - 1]) != "Enemy")
-        ret.push_back(new Position(temp_pos.col , temp_pos.row - 1));
-    }
-    return ret;
-}
+std::vector<Position> GetMoves(Player *p);
 
 // Move a player to a new position on the board. Return
 // true if they moved successfully, false otherwise.
-bool Board::MovePlayer(Player *p, Position pos){
-    if(SquareTypeStringify(arr_[pos.col][pos.row]) != "Wall"){
-        p->set_position(pos.row, pos.col);
-        SquareType temp = arr_[p->get_position().col][p->get_position().row];
-        arr_[p->get_position().col][p->get_position().row] = arr_[pos.col][pos.row];
-        arr_[pos.col][pos.row] = temp;
-        return true;
-    }
-    return false;
-}
+bool MovePlayer(Player *p, Position pos);
 
 // Get the square type of the exit square∏
-SquareType Board::GetExitOccupant(){
-    return SquareType::Exit;
-}
+SquareType GetExitOccupant();
 
 // You probably want to implement this
-std::ostream& operator<<(std::ostream& os, const Board &b){
-    for(int i = 0; i < b.cols_; i++){
-        for(int e = 0; e < b.rows_; e++){
-            std::string temp_str = SquareTypeStringify(b.arr_[i][e]);
-            if(temp_str == "Wall"){
-                std::cout << "❌" << std::endl;
-            }else if(temp_str == "Exit"){
-                std::cout << "✅" << std::endl;
-            }else if(temp_str == "Empty"){
-                std::cout << "⬜️" << std::endl;
-            }else if(temp_str == "Human"){
-                std::cout << "😅" << std::endl;
-            }else if(temp_str == "Enemy"){
-                std::cout << "🤡" << std::endl;
-            }else{
-                std::cout << "🪙" << std::endl;
-            }
-        }
-        std::cout << std::endl;
-    }
-}
+friend std::ostream& operator<<(std::ostream& os, const Board &b);
 

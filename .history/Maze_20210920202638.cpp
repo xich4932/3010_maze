@@ -65,8 +65,6 @@ Maze::Maze(int r, int c, std::string name){
         }
         players_[d]->set_position(temp_r, temp_c);
     }
-
-    
     
 }
 

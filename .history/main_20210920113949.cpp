@@ -7,10 +7,8 @@ int main(){
     //Board chess_board(4,4);
     //Maze my_maze = new Maze(4,4);
     //chess_board.displayUpdated();
-    Maze *my_maze = new Maze(4,4, "me");
-    while(!my_maze->IsGameOver()){
-        
-    }
+    Maze *my_maze = new Maze(4,4);
+    
 
     delete my_maze;
     return 0;

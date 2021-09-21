@@ -13,27 +13,7 @@ enum class SquareType { Wall, Exit, Empty, Human, Enemy, Treasure };
 // TODO: implement
 // this function should return a string representation of a given SquareType
 // for example an ascii letter or an emoji
-std::string SquareTypeStringify(SquareType sq){
-	switch (sq)
-	{
-	case SquareType::Wall :
-		/* code */
-		return "Wall";
-	case SquareType::Exit :
-		/* code */
-		return "Exit";
-	case SquareType::Empty :
-		/* code */
-		return "Empty";
-	case SquareType::Human:
-		return "Human";
-	case SquareType::Enemy :
-		/* code */
-		return "Enemy";
-	default:
-		return "Treasure";
-	}
-}
+std::string SquareTypeStringify(SquareType sq);
 
 class Board {
 public:
