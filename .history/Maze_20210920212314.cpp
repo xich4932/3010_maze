@@ -53,14 +53,10 @@ Maze::Maze(int r, int c, std::string name){
     players_.push_back(new Player("wall_2" ,0));        //6    
     players_.push_back(new Player("wall_3" ,0));        //7    
     players_.push_back(new Player("exit" ,0));          //8
-    std::vector<int> temp_path = board_->getPath();
-    //initialize the board with empty
-    for(int e =0; e < board_->get_cols(); e++){
-        for(int p = 0; p < board_->get_rows(); p++){
-            board_->SetSquareValue(Position(e, p), SquareType::Empty);
-        }
+    for(int e =0; e < path.size(); e++){
+        
     }
-    //put wall on the board
+    //set the position of wall that's is in not the expected solution path
     std::vector<int> path = board_->getPath();
     for(int d = 5; d < 8; d++){
         int temp_r = 0, temp_c=0;

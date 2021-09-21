@@ -53,14 +53,8 @@ Maze::Maze(int r, int c, std::string name){
     players_.push_back(new Player("wall_2" ,0));        //6    
     players_.push_back(new Player("wall_3" ,0));        //7    
     players_.push_back(new Player("exit" ,0));          //8
-    std::vector<int> temp_path = board_->getPath();
-    //initialize the board with empty
-    for(int e =0; e < board_->get_cols(); e++){
-        for(int p = 0; p < board_->get_rows(); p++){
-            board_->SetSquareValue(Position(e, p), SquareType::Empty);
-        }
-    }
-    //put wall on the board
+
+    //set the position of wall that's is in not the expected solution path
     std::vector<int> path = board_->getPath();
     for(int d = 5; d < 8; d++){
         int temp_r = 0, temp_c=0;
@@ -69,10 +63,10 @@ Maze::Maze(int r, int c, std::string name){
             temp_r = s % r;
             temp_c = s / r;
         }
-        
+        path[temp_c][temp_r] = 5;
         players_[d]->set_position(temp_r, temp_c);
     }
-
+    
 
 }
 
@@ -137,12 +131,12 @@ bool Board::generate(){
     int visited[cols_][rows_] ;
     //visited[0][0] = 0;
     memset(visited, 0, sizeof(visited));
-    /* for(int d =0 ;d < cols_; d++){
+    for(int d =0 ;d < cols_; d++){
         for(int f = 0; f < rows_; f++){
             std::cout << visited[d][f] << " ";
         }
         std::cout << std::endl;
-    } */
+    }
     //vector<int> path;
     path.push_back(0);
     srand((unsigned ) time(NULL));
@@ -162,10 +156,10 @@ bool Board::generate(){
 
         //std::cout << direction[curr][0] << " " << direction[curr][1] << std::endl;
         if(visited[temp_c][temp_r]) continue;
-       //std::cout << "tmp_point " << temp_r << " " << temp_c <<  std::endl;
+        std::cout << "tmp_point " << temp_r << " " << temp_c <<  std::endl;
         //std::cout << "tmp_c " << temp_c << std::endl;
-        //std::cout <<"-------------"<<std::endl;
-        /*  for(int t =0; t < cols_; t++){
+        std::cout <<"-------------"<<std::endl;
+         for(int t =0; t < cols_; t++){
             for(int y =0; y < rows_; y++){
                 if(t == temp_c && y == temp_r){
                     std::cout << 2 << " ";
@@ -176,8 +170,8 @@ bool Board::generate(){
                 
             }
             std::cout << std::endl;
-        } */
-       // std::cout <<"-------------"<<std::endl;
+        }
+        std::cout <<"-------------"<<std::endl;
         path.push_back(direction[curr]);
         max_step ++;
         
