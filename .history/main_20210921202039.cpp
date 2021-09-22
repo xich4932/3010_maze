@@ -49,7 +49,7 @@ int main(){
         temp_move = myboard->GetMoves(user);
         if(temp_move.size() >= 2){
             std::cout << "enemy is moving"<<std::endl;
-            turn_enemy = my_maze->getPlayer((rand()%2)+1);
+            turn_enemy = my_maze->getPlayer((rand()%3)+1);
             std::cout << "current : " << turn_enemy->get_name() << " " << turn_enemy->get_position().col << " " << turn_enemy->get_position().row << std::endl;
             std::vector<std::string> attack_direction = turn_enemy->ToRelativePosition(user->get_position());
             //std::cout << "attack_diretion " << attack_direction << std::endl;
@@ -89,10 +89,11 @@ int main(){
             std::cout<<"Enemy is observing you"<<std::endl;
         }
         
+
     }
     std::cout << user->get_name() <<" earn " << user->get_points() << " points." << std::endl;
     std::cout << my_maze->getPlayer(1)->get_name() <<" earn " << my_maze->getPlayer(1)->get_points() << " points." << std::endl;
-    std::cout << my_maze->getPlayer(2)->get_name() <<" earn " << my_maze->getPlayer(2)->get_points() << " points." << std::endl;
+    std::cout << my_maze->getPlayer(1)->get_name() <<" earn " << my_maze->getPlayer(2)->get_points() << " points." << std::endl;
 
     std::cout << "game end!" << std::endl;
     

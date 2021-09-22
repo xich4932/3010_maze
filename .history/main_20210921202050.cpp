@@ -89,10 +89,11 @@ int main(){
             std::cout<<"Enemy is observing you"<<std::endl;
         }
         
+
     }
     std::cout << user->get_name() <<" earn " << user->get_points() << " points." << std::endl;
     std::cout << my_maze->getPlayer(1)->get_name() <<" earn " << my_maze->getPlayer(1)->get_points() << " points." << std::endl;
-    std::cout << my_maze->getPlayer(2)->get_name() <<" earn " << my_maze->getPlayer(2)->get_points() << " points." << std::endl;
+    std::cout << my_maze->getPlayer(1)->get_name() <<" earn " << my_maze->getPlayer(2)->get_points() << " points." << std::endl;
 
     std::cout << "game end!" << std::endl;
     

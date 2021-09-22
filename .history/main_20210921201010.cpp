@@ -16,10 +16,9 @@ int main(){
     char ch;
     Player *turn_enemy;
     std::vector<std::string> temp_move;
-    std::cout << *my_maze << std::endl;
     //std::cout << *my_maze << std::endl;
     while(!my_maze->IsGameOver()){
-        //std::cout << *my_maze << std::endl;
+        std::cout << *my_maze << std::endl;
         temp_move = myboard->GetMoves(user);
         my_maze->GenerateReport(temp_move, user);
         
@@ -48,9 +47,7 @@ int main(){
         std::cout << *my_maze << std::endl;
         temp_move = myboard->GetMoves(user);
         if(temp_move.size() >= 2){
-            std::cout << "enemy is moving"<<std::endl;
-            turn_enemy = my_maze->getPlayer((rand()%2)+1);
-            std::cout << "current : " << turn_enemy->get_name() << " " << turn_enemy->get_position().col << " " << turn_enemy->get_position().row << std::endl;
+            turn_enemy = my_maze->getPlayer(rand()%3+1);
             std::vector<std::string> attack_direction = turn_enemy->ToRelativePosition(user->get_position());
             //std::cout << "attack_diretion " << attack_direction << std::endl;
             std::vector<SquareType> attack_choice;
@@ -80,6 +77,10 @@ int main(){
                 }
             }
 
+            for(int e =0; e < attack_point.size(); e++){
+                std::cout << "point: "<< attack_point[e].col << " " << attack_point[e].row << std::endl;
+            }
+
             po = turn_enemy->enemyStrategy(attack_choice, attack_point);
             myboard->MovePlayer(turn_enemy,po , 1);
         
@@ -89,10 +90,11 @@ int main(){
             std::cout<<"Enemy is observing you"<<std::endl;
         }
         
+
     }
-    std::cout << user->get_name() <<" earn " << user->get_points() << " points." << std::endl;
-    std::cout << my_maze->getPlayer(1)->get_name() <<" earn " << my_maze->getPlayer(1)->get_points() << " points." << std::endl;
-    std::cout << my_maze->getPlayer(2)->get_name() <<" earn " << my_maze->getPlayer(2)->get_points() << " points." << std::endl;
+    std::cout <<"you earn " << user->get_points() << " points." << std::endl;
+    std::cout <<"you earn " << my_maze->getPlayer(1)->get_points() << " points." << std::endl;
+    std::cout <<"you earn " << my_maze->getPlayer(2)->get_points() << " points." << std::endl;
 
     std::cout << "game end!" << std::endl;
     

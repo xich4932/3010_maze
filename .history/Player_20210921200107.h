@@ -54,7 +54,7 @@ public:
 
 private:
 	std::string name_;
-	int points_ = 0;
+	int points_;
 	Position pos_;
 	bool is_human_=0;
 

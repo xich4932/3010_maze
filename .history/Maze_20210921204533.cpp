@@ -105,8 +105,8 @@ Maze::Maze(int c, int r, std::string name){
     all_else.push_back(15);
     std::vector<int> no_ptr_path = path; //store the solution path
     //wall will not appear at the upper left corner
-    //no_ptr_path.push_back(1); //first 2 direction will be free
-    //no_ptr_path.push_back(board_->get_rows());
+    no_ptr_path.push_back(1); //first 2 direction will be free
+    no_ptr_path.push_back(board_->get_rows());
 
     srand((unsigned int)(time(NULL)));
     for(int d = 5; d < 8; d++){
