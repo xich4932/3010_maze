@@ -7,9 +7,7 @@
 #include<time.h>
 #include<cstring>
 //using namespace std;
-
 //return true when the path is in the vector
-//used in many function, not for specific purpose
 bool checkInPath(const int num, const std::vector<int> &vec){
     for(int d =0; d < vec.size(); d++){
         if(vec[d] == num) return true;
@@ -50,7 +48,6 @@ Board::Board(int c, int r){
     rows_ = r;
     cols_ = c;
     int flag = generate();
-    //keey generate until get a soluable maze
      while(!flag){
         path.clear();
         flag = generate();

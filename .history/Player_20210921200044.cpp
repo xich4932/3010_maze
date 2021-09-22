@@ -65,7 +65,7 @@ Position Player::enemyStrategy(std::vector<SquareType> choice, std::vector<Posit
     //std::string str = ToRelativePosition(pos);
     
     //Position enemy_now = pos_;
-    //std::cout << po.size() << std::endl;
+    std::cout << po.size() << std::endl;
          int i = rand()%choice.size();
     while(SquareTypeStringify(choice[i]) == "Wall" || SquareTypeStringify(choice[i]) == "Treasure" ){
         i = rand()%choice.size();

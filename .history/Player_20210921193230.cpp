@@ -37,23 +37,19 @@ void Player::SetPosition(Position pos){
 /* 
 
 */
-std::vector<std::string>  Player::ToRelativePosition(Position other){
-    std::vector<std::string> tmp;
+std::string  Player::ToRelativePosition(Position other){
+    std::string s = "";
     if(pos_.row < other.row){
-       tmp.push_back("RIGHT");
+        s += "R";
     }else if(pos_.row > other.row){
-        tmp.push_back("LEFT");
-       // s += "LEFT";
+        s += "L";
     }
     if(pos_.col < other.col){
-        tmp.push_back("UP");
-        //s += "UP";
+        s += "U";
     }else if(pos_.col > other.col){
-        tmp.push_back("DOWN");
-        //s += "DOWN";
+        s += "D";
     }
-    //std::cout << "S: " <<  s <<std::endl;
-    return tmp;
+    return s;
 }
 /* 
 if player can only move with less than 2 direction, enemy won't attack player
@@ -65,8 +61,7 @@ Position Player::enemyStrategy(std::vector<SquareType> choice, std::vector<Posit
     //std::string str = ToRelativePosition(pos);
     
     //Position enemy_now = pos_;
-    //std::cout << po.size() << std::endl;
-         int i = rand()%choice.size();
+    int i = rand()%choice.size();
     while(SquareTypeStringify(choice[i]) == "Wall" || SquareTypeStringify(choice[i]) == "Treasure" ){
         i = rand()%choice.size();
     }

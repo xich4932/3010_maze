@@ -42,7 +42,7 @@ public:
 
 	// Move a player to a new position on the board. Return
 	// true if they moved successfully, false otherwise.
-	bool MovePlayer(Player *p, Position pos, bool);
+	bool MovePlayer(Player *p, Position pos);
 
 	// Get the square type of the exit square∏
 	SquareType GetExitOccupant();

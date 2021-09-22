@@ -16,6 +16,9 @@ Player::Player(const std::string name, const bool is_human){
 
 }
 
+void Player::enemyStrategy(){
+    int turn = rand() % 1;
+}
 
 void Player::ChangePoints(const int x){
     if(is_human_){
@@ -37,23 +40,19 @@ void Player::SetPosition(Position pos){
 /* 
 
 */
-std::vector<std::string>  Player::ToRelativePosition(Position other){
-    std::vector<std::string> tmp;
+std::string  Player::ToRelativePosition(Position other){
+    std::string s = "";
     if(pos_.row < other.row){
-       tmp.push_back("RIGHT");
+        s += "R";
     }else if(pos_.row > other.row){
-        tmp.push_back("LEFT");
-       // s += "LEFT";
+        s += "L";
     }
     if(pos_.col < other.col){
-        tmp.push_back("UP");
-        //s += "UP";
+        s += "U";
     }else if(pos_.col > other.col){
-        tmp.push_back("DOWN");
-        //s += "DOWN";
+        s += "D";
     }
-    //std::cout << "S: " <<  s <<std::endl;
-    return tmp;
+    return s;
 }
 /* 
 if player can only move with less than 2 direction, enemy won't attack player
@@ -61,15 +60,18 @@ in case player are blocked and no way to escape
 otherwise enemy will calculate the direction of player and chase behind
  */
 
-Position Player::enemyStrategy(std::vector<SquareType> choice, std::vector<Position> po){
-    //std::string str = ToRelativePosition(pos);
-    
+void Player::enemyStrategy(std::vector<SquareType> choice){
+    std::string str = ToRelativePosition(pos);
+    char ch = str[rand()%str.length()];
     //Position enemy_now = pos_;
-    //std::cout << po.size() << std::endl;
-         int i = rand()%choice.size();
-    while(SquareTypeStringify(choice[i]) == "Wall" || SquareTypeStringify(choice[i]) == "Treasure" ){
-        i = rand()%choice.size();
+    if(ch == 'U'){
+        pos_.->col == 1;
+    }else if(ch == 'D'){
+
+    }else if(ch == 'W'){
+        
+    }else if(ch == 'E'){
+        
     }
-    return po[i];
 }
 

@@ -7,9 +7,7 @@
 #include<time.h>
 #include<cstring>
 //using namespace std;
-
 //return true when the path is in the vector
-//used in many function, not for specific purpose
 bool checkInPath(const int num, const std::vector<int> &vec){
     for(int d =0; d < vec.size(); d++){
         if(vec[d] == num) return true;
@@ -50,7 +48,6 @@ Board::Board(int c, int r){
     rows_ = r;
     cols_ = c;
     int flag = generate();
-    //keey generate until get a soluable maze
      while(!flag){
         path.clear();
         flag = generate();
@@ -106,10 +103,10 @@ Maze::Maze(int c, int r, std::string name){
     std::vector<int> all_else;
     all_else.push_back(0); 
     all_else.push_back(15);
-    std::vector<int> no_ptr_path = path; //store the solution path
+    std::vector<int> no_ptr_path = path;
     //wall will not appear at the upper left corner
-    /* no_ptr_path.push_back(1); first 2 direction will be free
-    no_ptr_path.push_back(board_->get_rows()); */
+    no_ptr_path.push_back(1);
+    no_ptr_path.push_back(board_->get_rows());
 
     srand((unsigned int)(time(NULL)));
     for(int d = 5; d < 8; d++){
@@ -153,7 +150,6 @@ Maze::Maze(int c, int r, std::string name){
             temp_c = s / r;
         }
         no_ptr_path.push_back(4*temp_c + temp_r);
-        wall_only.push_back(4*temp_c + temp_r);
         all_else.push_back(4*temp_c + temp_r);
         players_[d]->SetPosition(Position(temp_c, temp_r));
         //std::cout <<"enemy : " << temp_c << " " << temp_r <<std::endl;
@@ -169,10 +165,6 @@ Maze::Maze(int c, int r, std::string name){
     /* for(int o = 0; o < players_.size(); o++){
         std::cout << players_[o]->get_position().col <<  " " << players_[o]->get_position().row << std::endl;
     } */
-
-    for(int e =0; e < players_.size(); e++){
-        std::cout << players_[e]->get_name() << " "<< players_[e]->get_position().col << " " << players_[e]->get_position().row << std::endl;
-    }
 }
 
 
@@ -277,7 +269,7 @@ bool Board::generate(){
     int end_r = rows_ - 1;
     int time = 16;
     //std::cout <<"befpre" << std::endl;
-     while( path[path.size()-1] != 15 && path.size() < 12 && max_step < 16){
+     while( path[path.size()-1] != 15 && path.size() < 11 && max_step < 16){
         std::vector<int> direction = getDirection(path[path.size()-1], cols_, rows_, path);
         //std::cout << "direction : ";
         //printer(direction);

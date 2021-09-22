@@ -4,8 +4,7 @@
 #include<vector>
 #include<string>
 
-extern enum class SquareType;
-extern std::string SquareTypeStringify(SquareType);
+extern SquareType;
 
 struct Position {
 	int row;
@@ -44,7 +43,7 @@ public:
 	// You may want to implement these functions as well
 	// ToRelativePosition is a function we used to translate positions
 	// into directions relative to the player (up, down, etc)
-	std::vector<std::string> ToRelativePosition(Position other);
+	std::string ToRelativePosition(Position other);
 
   // Either override operator<< for Player or implement the following function
 	// Convert this player to a string representation of their name and points
@@ -54,7 +53,7 @@ public:
 
 private:
 	std::string name_;
-	int points_ = 0;
+	int points_;
 	Position pos_;
 	bool is_human_=0;
 

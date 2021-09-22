@@ -7,9 +7,7 @@
 #include<time.h>
 #include<cstring>
 //using namespace std;
-
 //return true when the path is in the vector
-//used in many function, not for specific purpose
 bool checkInPath(const int num, const std::vector<int> &vec){
     for(int d =0; d < vec.size(); d++){
         if(vec[d] == num) return true;
@@ -50,7 +48,6 @@ Board::Board(int c, int r){
     rows_ = r;
     cols_ = c;
     int flag = generate();
-    //keey generate until get a soluable maze
      while(!flag){
         path.clear();
         flag = generate();
@@ -106,10 +103,10 @@ Maze::Maze(int c, int r, std::string name){
     std::vector<int> all_else;
     all_else.push_back(0); 
     all_else.push_back(15);
-    std::vector<int> no_ptr_path = path; //store the solution path
+    std::vector<int> no_ptr_path = path;
     //wall will not appear at the upper left corner
-    /* no_ptr_path.push_back(1); first 2 direction will be free
-    no_ptr_path.push_back(board_->get_rows()); */
+    no_ptr_path.push_back(1);
+    no_ptr_path.push_back(board_->get_rows());
 
     srand((unsigned int)(time(NULL)));
     for(int d = 5; d < 8; d++){
@@ -153,7 +150,6 @@ Maze::Maze(int c, int r, std::string name){
             temp_c = s / r;
         }
         no_ptr_path.push_back(4*temp_c + temp_r);
-        wall_only.push_back(4*temp_c + temp_r);
         all_else.push_back(4*temp_c + temp_r);
         players_[d]->SetPosition(Position(temp_c, temp_r));
         //std::cout <<"enemy : " << temp_c << " " << temp_r <<std::endl;
@@ -169,10 +165,6 @@ Maze::Maze(int c, int r, std::string name){
     /* for(int o = 0; o < players_.size(); o++){
         std::cout << players_[o]->get_position().col <<  " " << players_[o]->get_position().row << std::endl;
     } */
-
-    for(int e =0; e < players_.size(); e++){
-        std::cout << players_[e]->get_name() << " "<< players_[e]->get_position().col << " " << players_[e]->get_position().row << std::endl;
-    }
 }
 
 
@@ -235,7 +227,6 @@ void printer1(std::vector<std::array<int, 2>> pri){
 
 bool Maze::IsGameOver(){
     if(players_[0]->get_position() == players_[8]->get_position()){
-        players_[0]->ChangePoints(1);
         return true;
     }else if(players_[0]->get_position() == players_[1]->get_position() ||
     players_[0]->get_position() == players_[2]->get_position()){
@@ -277,7 +268,7 @@ bool Board::generate(){
     int end_r = rows_ - 1;
     int time = 16;
     //std::cout <<"befpre" << std::endl;
-     while( path[path.size()-1] != 15 && path.size() < 12 && max_step < 16){
+     while( path[path.size()-1] != 15 && path.size() < 13 && max_step < 16){
         std::vector<int> direction = getDirection(path[path.size()-1], cols_, rows_, path);
         //std::cout << "direction : ";
         //printer(direction);
@@ -318,35 +309,35 @@ std::vector<std::string> Board::GetMoves(Player *p){
     if(temp_pos.col == 0){
         if(SquareTypeStringify(arr_[temp_pos.col + 1][temp_pos.row]) != "Wall" &&
             SquareTypeStringify(arr_[temp_pos.col + 1][temp_pos.row]) != "Enemy")       
-        str.push_back("DOWN");
+        str.push_back("down");
     }else if(temp_pos.col == cols_ - 1){
         if(SquareTypeStringify(arr_[temp_pos.col - 1][temp_pos.row]) != "Wall" &&
             SquareTypeStringify(arr_[temp_pos.col - 1][temp_pos.row]) != "Enemy")       
-        str.push_back("UP");
+        str.push_back("up");
     }else{
         if(SquareTypeStringify(arr_[temp_pos.col + 1][temp_pos.row]) != "Wall" &&
             SquareTypeStringify(arr_[temp_pos.col + 1][temp_pos.row]) != "Enemy")
-            str.push_back("DOWN");
+            str.push_back("down");
         if(SquareTypeStringify(arr_[temp_pos.col - 1][temp_pos.row]) != "Wall" &&
             SquareTypeStringify(arr_[temp_pos.col - 1][temp_pos.row]) != "Enemy")
-        str.push_back("UP");
+        str.push_back("up");
     }
 
     if(temp_pos.row == 0){
         if(SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row + 1]) != "Wall" &&
             SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row + 1]) != "Enemy")
-        str.push_back("RIGHT");
+        str.push_back("right");
     }else if(temp_pos.row == rows_ - 1){
         if(SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row - 1]) != "Wall" &&
             SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row - 1]) != "Enemy")
-        str.push_back("LEFT");
+        str.push_back("left");
     }else{
         if(SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row + 1]) != "Wall" &&
             SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row + 1]) != "Enemy")
-        str.push_back("RIGHT");
+        str.push_back("right");
         if(SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row - 1]) != "Wall" &&
             SquareTypeStringify(arr_[temp_pos.col ][temp_pos.row - 1]) != "Enemy")
-        str.push_back("LEFT");
+        str.push_back("left");
         
     }
     return str;
@@ -354,44 +345,33 @@ std::vector<std::string> Board::GetMoves(Player *p){
 
 // Move a player to a new position on the board. Return
 // true if they moved successfully, false otherwise.
-bool Board::MovePlayer(Player *p, Position pos, bool is_enemy){
+bool Board::MovePlayer(Player *p, Position pos){
     if(SquareTypeStringify(arr_[pos.col][pos.row]) != "Wall"){
        //p->set_position(pos.row, pos.col);
         if(SquareTypeStringify(arr_[pos.col][pos.row]) == "Treasure"){
-            //p->SetPosition(pos);
             SetSquareValue(pos, SquareType::Empty);
             p->ChangePoints(100);
         }
-        if(SquareTypeStringify(arr_[pos.col][pos.row]) == "Enemy" && !is_enemy){
+        if(SquareTypeStringify(arr_[pos.col][pos.row]) == "Enemy"){
             SetSquareValue(p->get_position(), SquareType::Empty);
-            p->SetPosition(pos);
-            return false;
-        }
-        if(SquareTypeStringify(arr_[pos.col][pos.row]) == "Human" && is_enemy){
-            SetSquareValue(pos, SquareType::Enemy);
-            SetSquareValue(p->get_position(), SquareType::Empty);
-            //arr_[pos.col][pos.row] = SquareType::Enemy;
-            //arr_[p->get_position().col][p->get_position().row] = SquareType::Empty;
-            std::cout << p->get_name()<<" catch you!" <<std::endl;
-            p->SetPosition(pos);
-            return false;
+            
         }
         SquareType temp = arr_[p->get_position().col][p->get_position().row];
         arr_[p->get_position().col][p->get_position().row] = arr_[pos.col][pos.row];
         arr_[pos.col][pos.row] = temp;
         p->SetPosition(Position(pos.col, pos.row));
+        
         return true;
     }
-    return true;
+    return false;
 }
 
-void Maze::GenerateReport(std::vector<std::string> str, Player* curr_player){
-    std::cout << curr_player->get_name() << " can go ";
+void Maze::GenerateReport(std::vector<std::string> str){
+    std::cout << "You can choose to move ";
     for(int y = 0; y < str.size(); y++){
-        std::cout << str[y] << ", ";
+        std::cout << str[y] << " ";
     }
-    std::cout << std::endl;
-    std::cout <<"Please enter your choice" << std::endl;
+    std::cout <<" but not required." << std::endl;
 }
 
 // Get the square type of the exit square∏
