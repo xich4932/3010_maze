@@ -19,11 +19,14 @@ int main(){
         std::cout << *my_maze << std::endl;
         std::vector<std::string> temp_move = myboard->GetMoves(user);
         my_maze->GenerateReport(temp_move);
-        
-        std::cin >> ch;
-        std::cin.clear();
-        std::cin.sync();
-         
+        //std::cout << myboard << std::endl;
+         //char ch = std::cin.get();
+         //std::string ch;
+         //char ch;
+         std::cin >> ch;
+         std::cin.clear();
+         std::cin.sync();
+         //std::cin.ignore(999, '\n');
         Position step = Position(user->get_position());
         //ch = getch();
         if(ch == 'w' || ch == 'W'){
@@ -37,14 +40,11 @@ int main(){
         }else{
             std::cout <<"invalid input" << std::endl;
         }
-        if(!myboard->MovePlayer(user,step)){
-            std::cout <<"oohs, you are caught by enemy!" <<std::endl;
-            my_maze->IsGameOver();
-
-        } 
+        myboard->MovePlayer(user,step);
+        
     }
-    std::cout <<"you earn " << user->get_points() << " points." << std::endl; 
     std::cout << "game end!" << std::endl;
-    
+    //my_maze.getMaze()->displayUpdated();
+    //delete my_maze;
     return 0;
 }

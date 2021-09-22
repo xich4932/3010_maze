@@ -43,7 +43,7 @@ int main(){
 
         } 
     }
-    std::cout <<"you earn " << user->get_points() << " points." << std::endl; 
+    std::cout <<"you earn " << user->getPoint() << " points." << std::endl; 
     std::cout << "game end!" << std::endl;
     
     return 0;

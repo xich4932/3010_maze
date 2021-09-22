@@ -348,22 +348,18 @@ std::vector<std::string> Board::GetMoves(Player *p){
 bool Board::MovePlayer(Player *p, Position pos){
     if(SquareTypeStringify(arr_[pos.col][pos.row]) != "Wall"){
        //p->set_position(pos.row, pos.col);
-        if(SquareTypeStringify(arr_[pos.col][pos.row]) == "Treasure"){
-            SetSquareValue(pos, SquareType::Empty);
+        if(SquareTypeStringify(arr_[pos.col][pos.row]) == "Treasure")){
+            SetSquareValue(pos, Empty);
             p->ChangePoints(100);
-            
-        }
-        if(SquareTypeStringify(arr_[pos.col][pos.row]) == "Enemy"){
-            SetSquareValue(p->get_position(), SquareType::Empty);
-            return false;
         }
         SquareType temp = arr_[p->get_position().col][p->get_position().row];
         arr_[p->get_position().col][p->get_position().row] = arr_[pos.col][pos.row];
         arr_[pos.col][pos.row] = temp;
         p->SetPosition(Position(pos.col, pos.row));
+        
         return true;
     }
-    return true;
+    return false;
 }
 
 void Maze::GenerateReport(std::vector<std::string> str){

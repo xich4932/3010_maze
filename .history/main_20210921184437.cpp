@@ -37,13 +37,10 @@ int main(){
         }else{
             std::cout <<"invalid input" << std::endl;
         }
-        if(!myboard->MovePlayer(user,step)){
-            std::cout <<"oohs, you are caught by enemy!" <<std::endl;
-            my_maze->IsGameOver();
-
-        } 
+        if(!myboard->MovePlayer(user,step)) my_maze->IsGameOver();
+        
+        
     }
-    std::cout <<"you earn " << user->get_points() << " points." << std::endl; 
     std::cout << "game end!" << std::endl;
     
     return 0;
