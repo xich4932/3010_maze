@@ -417,7 +417,7 @@ std::ostream& operator<<(std::ostream& os, const Maze &m){
     return os;
 }
  
-Player * Maze::getPlayer(int num){
+Player * Maze::getPlayer(unsigned int num){
     if(num < players_.size()){
         return players_[num];
     }else{

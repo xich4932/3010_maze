@@ -4,7 +4,8 @@
 #include<vector>
 #include<string>
 
-
+extern enum class SquareType;
+extern std::string SquareTypeStringify(SquareType);
 
 struct Position {
 	int row;
@@ -30,7 +31,7 @@ public:
 	bool is_human() const {return is_human_; }  // inline member function
 
 
-	
+	Position enemyStrategy(std::vector<SquareType>, std::vector<Position>);
 	void ChangePoints(const int x);  
 	// You MUST implement the following functions
 

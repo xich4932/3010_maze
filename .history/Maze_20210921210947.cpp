@@ -11,7 +11,7 @@
 //return true when the path is in the vector
 //used in many function, not for specific purpose
 bool checkInPath(const int num, const std::vector<int> &vec){
-    for(unsigned int d =0; d < vec.size(); d++){
+    for(int d =0; d < vec.size(); d++){
         if(vec[d] == num) return true;
     }
     return false;
@@ -173,7 +173,7 @@ Maze::~Maze(){
 } */
 //for debug
 void printer(std::vector<int> pri){
-    for(unsigned int i  =0 ; i< pri.size(); i++){
+    for(int i  =0 ; i< pri.size(); i++){
         std::cout << pri[i] <<" ";
     }
     std::cout << std::endl;
@@ -203,7 +203,7 @@ std::vector<int> getDirection(int point, int max_c, int max_r, std::vector<int> 
     }
     
     std::vector<int> tmp;
-    for(unsigned int i = 0; i < ret.size(); i++){
+    for(int i = 0; i < ret.size(); i++){
         if(!checkInPath(ret[i], vec)){
             tmp.push_back(ret[i]);
         }
@@ -247,11 +247,11 @@ bool Board::generate(){
     //int max = rows_ * cols_;
     visited[0][0] = 1;
     //len[0] = 1;
-    //int start_r = 0;
-    //int start_c = 0;
-    //int end_c = cols_ - 1;
-    //int end_r = rows_ - 1;
-    //int time = 16;
+    int start_r = 0;
+    int start_c = 0;
+    int end_c = cols_ - 1;
+    int end_r = rows_ - 1;
+    int time = 16;
         //the maximum step of soluable path is 12
         //because we need to leave space for enemy, player, treasure, and exit
      while( path[path.size()-1] != rows_ * cols_ - 1 && path.size() < 12 && max_step < 16){
@@ -374,7 +374,7 @@ bool Board::MovePlayer(Player *p, Position pos, bool is_enemy){
 
 void Maze::GenerateReport(std::vector<std::string> str, Player* curr_player){
     std::cout << curr_player->get_name() << " can go ";
-    for(unsigned int y = 0; y < str.size(); y++){
+    for(int y = 0; y < str.size(); y++){
         std::cout << str[y] << ", ";
     }
     std::cout << std::endl;

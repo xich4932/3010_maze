@@ -374,7 +374,7 @@ bool Board::MovePlayer(Player *p, Position pos, bool is_enemy){
 
 void Maze::GenerateReport(std::vector<std::string> str, Player* curr_player){
     std::cout << curr_player->get_name() << " can go ";
-    for(unsigned int y = 0; y < str.size(); y++){
+    for(int y = 0; y < str.size(); y++){
         std::cout << str[y] << ", ";
     }
     std::cout << std::endl;

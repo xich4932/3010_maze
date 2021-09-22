@@ -1,21 +1,10 @@
-#include<iostream>
+#include<iostream>#include <conio.h>//
 #include"Maze.h"
 
 //#include "Player.h"
 
 
 int main(){
-    std::cout <<"-------------------------------------------------------" <<std::endl;
-    std::cout <<"the maze is generate with soluable path" << std::endl;
-    std::cout <<"enemy is designed to catch up player" << std::endl;
-    std::cout <<"sometimes the map can be really hard for player to win" << std::endl;
-    std::cout <<"please try serveral times" << std::endl;
-    std::cout <<"hint: if two direction of player is blocked," << std::endl;
-    std::cout <<"       enemy will only observe user" << std::endl;
-    std::cout <<"suicide is allowed!!!!!" << std::endl;
-    std::cout <<"WASD or wasd for control" << std::endl;
-    std::cout <<"-------------------------------------------------------" <<std::endl;
-    
     //Board chess_board(4,4);
     //Maze my_maze = new Maze(4,4);
     //chess_board.displayUpdated();
@@ -58,17 +47,15 @@ int main(){
         }
         std::cout << *my_maze << std::endl;
         temp_move = myboard->GetMoves(user);
-        if(temp_move.size() >= 2){ //when users can move at least 2 direction ,enemy will start attack
+        if(temp_move.size() >= 2){
             std::cout << "enemy is moving"<<std::endl;
-            turn_enemy = my_maze->getPlayer((rand()%2)+1); //randomly choose a enemy
-            std::cout << "current : " << turn_enemy->get_name() << " (" << turn_enemy->get_position().col << "," << turn_enemy->get_position().row<<")" << std::endl;
-            //find the relative position to player, usually be 2 direction
+            turn_enemy = my_maze->getPlayer((rand()%2)+1);
+            std::cout << "current : " << turn_enemy->get_name() << " " << turn_enemy->get_position().col << " " << turn_enemy->get_position().row << std::endl;
             std::vector<std::string> attack_direction = turn_enemy->ToRelativePosition(user->get_position());
             //std::cout << "attack_diretion " << attack_direction << std::endl;
             std::vector<SquareType> attack_choice;
             std::vector<Position> attack_point;
             Position po;
-            //determine the direction
             for(std::vector<std::string>::iterator y = attack_direction.begin(); y != attack_direction.end(); y++){
                 if(*y == "RIGHT"){
                     po = turn_enemy->get_position();
@@ -92,15 +79,13 @@ int main(){
                     attack_point.push_back(po);
                 }
             }
-            //choose a direction to move
+
             po = my_maze->enemyStrategy(attack_choice, attack_point);
-            //move enemy, somehting might happen
             myboard->MovePlayer(turn_enemy,po , 1);
-            //print new maze
+        
             std::cout << *my_maze << std::endl;
 
         }else{
-            //enemy not attack
             std::cout<<"Enemy is observing you"<<std::endl;
         }
         

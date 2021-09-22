@@ -85,11 +85,11 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Maze &m);
 	Player * getPlayer(int num);
 	
-	Position enemyStrategy(std::vector<SquareType>, std::vector<Position>);
+	
 private:
 	Board *board_; // HINT: when you instantiate your board_, use the new Board() syntax
 	std::vector<Player *> players_;
-	//int turn_count_;
+	int turn_count_;
 	
 	// you may add more fields, as needed
 

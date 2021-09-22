@@ -173,7 +173,7 @@ Maze::~Maze(){
 } */
 //for debug
 void printer(std::vector<int> pri){
-    for(unsigned int i  =0 ; i< pri.size(); i++){
+    for(int i  =0 ; i< pri.size(); i++){
         std::cout << pri[i] <<" ";
     }
     std::cout << std::endl;
@@ -203,7 +203,7 @@ std::vector<int> getDirection(int point, int max_c, int max_r, std::vector<int> 
     }
     
     std::vector<int> tmp;
-    for(unsigned int i = 0; i < ret.size(); i++){
+    for(int i = 0; i < ret.size(); i++){
         if(!checkInPath(ret[i], vec)){
             tmp.push_back(ret[i]);
         }
@@ -374,7 +374,7 @@ bool Board::MovePlayer(Player *p, Position pos, bool is_enemy){
 
 void Maze::GenerateReport(std::vector<std::string> str, Player* curr_player){
     std::cout << curr_player->get_name() << " can go ";
-    for(unsigned int y = 0; y < str.size(); y++){
+    for(int y = 0; y < str.size(); y++){
         std::cout << str[y] << ", ";
     }
     std::cout << std::endl;
